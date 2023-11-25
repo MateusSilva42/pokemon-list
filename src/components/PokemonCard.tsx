@@ -12,7 +12,13 @@ export default function PokemonCard() {
   }
 
   return (
-    <Card sx={{ minWidth: 300, marginX: 5, marginY: 2 }}>
+    <Card sx={{ 
+      minWidth: {
+       xs: 400,
+       sm: 300,
+      }, 
+      marginX: 5, 
+      marginY: 2 }}>
       <CardMedia
         component="img"
         alt="pokeball"
