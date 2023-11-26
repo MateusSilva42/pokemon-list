@@ -4,7 +4,11 @@ import favoriteIcon from '../assets/favorite-border.png'
 import favoritedIcon from '../assets/favorite-full.png'
 import { useState } from "react"
 
-export default function PokemonCard() {
+interface PokemonCardProps {
+  name: string;
+}
+
+export default function PokemonCard( {name}: PokemonCardProps) {
   const [isFavorited, setIsFavorited] = useState(false)
 
   const handleFavorite = () => {
@@ -27,10 +31,7 @@ export default function PokemonCard() {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Pokemon maroto
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          bla bla bla sobre esse pokémon
+          {name}
         </Typography>
       </CardContent>
       <CardActions>

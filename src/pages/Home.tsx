@@ -10,9 +10,13 @@ function Home() {
   const [pokemon, setPokemon] = useState<String[]>([]);
 
   useEffect(() => {
-    setPokemon(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'])
-  })
-
+    fetch('https://pokeapi.co/api/v2/pokemon')
+    .then(response => response.json())
+    .then(data => {
+      const results = data.results.map((pokemon: { name: String; }) => pokemon.name)
+      setPokemon(results)
+    }, )
+  }, [])
 
   return (
     <>
@@ -22,9 +26,22 @@ function Home() {
 
       <Box sx={{padding: 5, display:'flex', flexDirection: 'column' ,alignItems:'center'}}>
         <Box sx={{display: "flex", flexWrap: 'wrap', justifyContent: 'center'}}>
-        {pokemon.map((pokemon, index) => (
-          <PokemonCard key={index} />
-        ))} 
+        {/* {eachPokemon.map((pokemon, index) => (
+          
+          <PokemonCard key={index} name={pokemon.name} />
+        ))} */}
+        <PokemonCard name="teste"/>
+        <PokemonCard name="teste"/>
+        <PokemonCard name="teste"/>
+        <PokemonCard name="teste"/>
+        <PokemonCard name="teste"/>
+        <PokemonCard name="teste"/>
+        <PokemonCard name="teste"/>
+        <PokemonCard name="teste"/>
+        <PokemonCard name="teste"/>
+        <PokemonCard name="teste"/>
+        <PokemonCard name="teste"/>
+        <PokemonCard name="teste"/>
           
         </Box>
        
