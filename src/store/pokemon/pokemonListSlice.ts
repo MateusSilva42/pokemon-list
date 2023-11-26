@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 // import type { PayloadAction } from "@reduxjs/toolkit";
 
-interface Pokemon {
+export interface Pokemon {
     name: string,
     url: string
 }
@@ -11,7 +11,7 @@ export interface PokemonListState {
     pokemons: Pokemon[]
     next: string | null
     previous: string | null
-    loading: 'idle' | 'pending' | 'rejected' | 'succeeded'
+    loading: 'idle' | 'pending' | 'rejected' | 'succeded'
 }
 
 const initialState: PokemonListState = {
@@ -21,33 +21,46 @@ const initialState: PokemonListState = {
     loading: 'idle'
 }
 
-const fetchPokemonList = createAsyncThunk(
+export const fetchPokemonList = createAsyncThunk(
     'pokemon/fetchPokemonList',
     async (url: string | undefined = 'https://pokeapi.co/api/v2/pokemon') => {
         const response = await fetch(url)
-        return response.json()
+        const data = await response.json()
+        console.log('response', response);
+        
+        console.log('dados', data);
+        
+        return data
     }
 )
 
-export const favoriteSlice = createSlice({
+
+export const pokemonListSlice = createSlice({
     name: 'pokemonList',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchPokemonList.pending, (state, action) => {
             state.loading = 'pending'
+            console.log('LOADING PENDING');
+            
         })
         builder.addCase(fetchPokemonList.fulfilled, (state, action) => {
-            state.loading = action.payload.name
-            state.pokemons = action.payload.results
-            state.next = action.payload.next
-            state.previous = action.payload.previous
-        })
+            state.loading = 'succeded';
+            state.pokemons = action.payload.results.map((pokemon: any) => ({
+                name: pokemon.name,
+                url: pokemon.url
+            }));
+            state.next = action.payload.next;
+            state.previous = action.payload.previous;
+        });
         builder.addCase(fetchPokemonList.rejected, (state, action) => {
+            console.log('LOADING REJECTED');
+            
             state.loading = 'rejected'
         })
     }
 })
 
-export const like = favoriteSlice.actions
-export default favoriteSlice.reducer
+export const like = pokemonListSlice.actions
+export default pokemonListSlice.reducer
