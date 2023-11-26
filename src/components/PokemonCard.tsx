@@ -2,13 +2,25 @@ import {IconButton, Card, CardActions, CardContent, CardMedia, Typography} from 
 import pokeball from '../assets/pokeball.png'
 import favoriteIcon from '../assets/favorite-border.png'
 import favoritedIcon from '../assets/favorite-full.png'
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch } from "../store/store"
+import { fetchPokemon } from "../store/pokemon/pokemonSlice"
 
 interface PokemonCardProps {
-  name: string;
+  url: string;
 }
 
-export default function PokemonCard( {name}: PokemonCardProps) {
+export default function PokemonCard( {url}: PokemonCardProps) {
+  const pokemon = useSelector((state: any) => state.pokemon[url]);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+      dispatch(fetchPokemon(url));
+  }, [url, dispatch])
+
+  console.log('POKEMON', pokemon);
+  
   const [isFavorited, setIsFavorited] = useState(false)
 
   const handleFavorite = () => {
@@ -31,7 +43,7 @@ export default function PokemonCard( {name}: PokemonCardProps) {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {name}
+          {pokemon?.name}
         </Typography>
       </CardContent>
       <CardActions>

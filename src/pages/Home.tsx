@@ -1,4 +1,4 @@
-import { Box} from "@mui/material";
+import { Box, Pagination} from "@mui/material";
 import Header from "../components/Header";
 import Pokedex from "../components/Pokedex";
 import PokemonCard from "../components/PokemonCard";
@@ -29,11 +29,15 @@ function Home() {
       <Box sx={{padding: 5, display:'flex', flexDirection: 'column' ,alignItems:'center'}}>
         <Box sx={{display: "flex", flexWrap: 'wrap', justifyContent: 'center'}}>
           {pokemonList.pokemons.map((pokemon: Pokemon, index: number) => (
-            <PokemonCard key={index} name={pokemon.name} />
+            <PokemonCard key={index} url={pokemon.url} />
           ))}
         </Box>
           
        
+      </Box>
+
+      <Box sx={{display: 'flex', justifyContent: 'center', marginBottom: 5}}>
+          <Pagination></Pagination>
       </Box>
 
       <Footer />
