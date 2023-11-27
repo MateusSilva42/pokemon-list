@@ -6,15 +6,18 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch } from "../store/store"
 import { fetchPokemon, Pokemon } from "../store/pokemon/pokemonSlice"
+import { Link } from "react-router-dom"
+import { red, yellow } from "@mui/material/colors"
 
 interface PokemonCardProps {
   pokemon: Pokemon;
+  bgColor?: string;
 }
 
-export default function PokemonCard( {pokemon}: PokemonCardProps) {
+export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
   const [isFavorited, setIsFavorited] = useState(false)
 
-  console.log(pokemon);
+  console.log(bgColor);
   
 
   const handleFavorite = () => {
@@ -28,7 +31,9 @@ export default function PokemonCard( {pokemon}: PokemonCardProps) {
               sm: 300,
              }, 
              marginX: 5, 
-             marginY: 2 }}>
+             marginY: 2,
+             bgcolor: bgColor? bgColor : 'white',}}
+             >
                 <CardMedia
                   component="img"
                   alt={pokemon.name}
@@ -36,15 +41,17 @@ export default function PokemonCard( {pokemon}: PokemonCardProps) {
                   image={pokemon.picture['official-artwork'].front_default}
                   style={{ 
                     objectFit: 'cover',
-                    objectPosition: 'top'
+                    objectPosition: 'top',
                   }}
                 />
-              <CardContent>
+              <CardContent >
                 <Box sx={{ display: 'flex', justifyContent: 'space-between'}}>
 
                   <Box>
                   <Typography gutterBottom variant="h5" component="div">
+                  <Link to={`/pokemon/${pokemon.id}`}>
                     {pokemon.name}
+                  </Link>
                   </Typography>
                   <Typography gutterBottom variant="h4" component="div">
                     #{pokemon.id}

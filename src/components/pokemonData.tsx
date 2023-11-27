@@ -7,14 +7,13 @@ import PokemonCard from "./PokemonCard";
 
 interface PokemonDataProps {
   url: string;
+  bgColor?: string;
 }
 
-export default function PokemonList( {url}: PokemonDataProps) {
-  // const pokemon = useSelector((state: any) => state.pokemon.data);
+export default function PokemonList( {url, bgColor}: PokemonDataProps) {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    // Substitua 'url' pela URL que você deseja buscar
     dispatch(fetchPokemon(url));
   }, []);
 
@@ -30,7 +29,7 @@ export default function PokemonList( {url}: PokemonDataProps) {
 
   return (
     <div>
-        <PokemonCard pokemon={pokemon} />
+        <PokemonCard pokemon={pokemon} bgColor={bgColor}/>
     </div>
   );
 }

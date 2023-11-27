@@ -1,5 +1,5 @@
 import { Box, Pagination} from "@mui/material";
-import Header from "../components/header";
+import Header from "../components/Header";
 import Pokedex from "../components/Pokedex";
 import PokemonCard from "../components/PokemonCard";
 import Footer from "../components/Footer";
