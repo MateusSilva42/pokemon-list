@@ -26,10 +26,6 @@ export const fetchPokemonList = createAsyncThunk(
     async (url: string | undefined = 'https://pokeapi.co/api/v2/pokemon') => {
         const response = await fetch(url)
         const data = await response.json()
-        console.log('response', response);
-        
-        console.log('dados', data);
-        
         return data
     }
 )
@@ -42,8 +38,6 @@ export const pokemonListSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchPokemonList.pending, (state, action) => {
             state.loading = 'pending'
-            console.log('LOADING PENDING');
-            
         })
         builder.addCase(fetchPokemonList.fulfilled, (state, action) => {
             state.loading = 'succeded';
@@ -55,8 +49,6 @@ export const pokemonListSlice = createSlice({
             state.previous = action.payload.previous;
         });
         builder.addCase(fetchPokemonList.rejected, (state, action) => {
-            console.log('LOADING REJECTED');
-            
             state.loading = 'rejected'
         })
     }

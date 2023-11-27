@@ -1,14 +1,14 @@
 // pokemonSlice.ts
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-interface Pokemon {
+export interface Pokemon {
   id: number;
   name: string;
   // outras propriedades do Pokémon
 }
 
 interface PokemonState {
-  data: { [key: string]: Pokemon };
+  data:  {[key: number]: Pokemon}
   loading: 'idle' | 'pending' | 'rejected' | 'succeeded';
 }
 
@@ -36,11 +36,10 @@ export const pokemonSlice = createSlice({
     });
     builder.addCase(fetchPokemon.fulfilled, (state, action) => {
       const pokemon = action.payload;
-      state.data[pokemon.name] = {
+      state.data[pokemon.id] = ({
         id: pokemon.id,
         name: pokemon.name,
-        // adicione outras propriedades conforme necessário
-      };
+      }) 
       state.loading = 'succeeded';
     });
     builder.addCase(fetchPokemon.rejected, (state) => {
