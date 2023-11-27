@@ -52,7 +52,7 @@ export default function PokemonCard( {pokemon}: PokemonCardProps) {
                   </Box>
 
                   <Box sx={{marginLeft: 5}}>
-                    <Typography variant="subtitle2">Peso: {pokemon.weight}g</Typography>
+                    <Typography variant="subtitle2">Peso: {(pokemon.weight)/10 }Kg</Typography>
                     <Typography variant="subtitle2">Tipo(s): {pokemon.types.map(t => t.type.name).join(',')}</Typography>
                   </Box>
 
