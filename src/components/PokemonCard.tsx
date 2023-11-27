@@ -1,11 +1,9 @@
 import {IconButton, Card, CardActions, CardContent, CardMedia, Typography, Box} from "@mui/material"
-import pokeball from '../assets/pokeball.png'
 import favoriteIcon from '../assets/favorite-border.png'
 import favoritedIcon from '../assets/favorite-full.png'
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { AppDispatch } from "../store/store"
-import { fetchPokemon, Pokemon } from "../store/pokemon/pokemonSlice"
+import { useState } from "react"
+import { Pokemon } from "../store/pokemon/pokemonSlice"
+import { Link } from "react-router-dom"
 
 interface PokemonCardProps {
   pokemon: Pokemon;
@@ -44,7 +42,9 @@ export default function PokemonCard( {pokemon}: PokemonCardProps) {
 
                   <Box>
                   <Typography gutterBottom variant="h5" component="div">
+                  <Link to={`/pokemon/${pokemon.id}`}>
                     {pokemon.name}
+                  </Link>
                   </Typography>
                   <Typography gutterBottom variant="h4" component="div">
                     #{pokemon.id}
