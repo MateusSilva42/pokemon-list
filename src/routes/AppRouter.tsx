@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "../pages/Home";
+import PokemonPage from "../pages/Pokemon"
 
 const routes = createBrowserRouter([
   {
@@ -7,6 +8,10 @@ const routes = createBrowserRouter([
     element: <Home />,
     errorElement: <h1>Error 404 - Not Found</h1>,
   },
+  {
+    path: "/pokemon",
+    element: <PokemonPage />
+  }
 ]);
 
 function AppRoutes() {
