@@ -29,19 +29,35 @@ export default function PokemonCard( {pokemon}: PokemonCardProps) {
              }, 
              marginX: 5, 
              marginY: 2 }}>
-              <CardMedia
-                component="img"
-                alt="pokeball"
-                height="140"
-                image={pokeball}
-              />
+                <CardMedia
+                  component="img"
+                  alt={pokemon.name}
+                  height="250"
+                  image={pokemon.picture['official-artwork'].front_default}
+                  style={{ 
+                    objectFit: 'cover',
+                    objectPosition: 'top'
+                  }}
+                />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {pokemon.name}
-                </Typography>
-                <Typography gutterBottom variant="h5" component="div">
-                  #{pokemon.id}
-                </Typography>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between'}}>
+
+                  <Box>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {pokemon.name}
+                  </Typography>
+                  <Typography gutterBottom variant="h4" component="div">
+                    #{pokemon.id}
+                  </Typography>
+                  </Box>
+
+                  <Box sx={{marginLeft: 5}}>
+                    <Typography variant="subtitle2">Peso: {pokemon.weight}g</Typography>
+                    <Typography variant="subtitle2">Tipo(s): {pokemon.types.map(t => t.type.name).join(',')}</Typography>
+                  </Box>
+
+                </Box>
+                
               </CardContent>
               <CardActions>
               <IconButton aria-label="favorite" onClick={handleFavorite}>

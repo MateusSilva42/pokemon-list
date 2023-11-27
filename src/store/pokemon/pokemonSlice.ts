@@ -1,10 +1,23 @@
 // pokemonSlice.ts
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+interface PokemonType {
+  name: string
+}
+
+interface PokemonPicture {
+  'official-artwork': {
+    front_default: string
+  }
+}
 export interface Pokemon {
   id: number;
   name: string;
-  // outras propriedades do Pokémon
+  weight: number;
+  types: { type: PokemonType}[];
+  picture: PokemonPicture;
+  // abilities: string[];
+  // stats: {};
 }
 
 interface PokemonState {
@@ -39,6 +52,11 @@ export const pokemonSlice = createSlice({
       state.data[pokemon.id] = ({
         id: pokemon.id,
         name: pokemon.name,
+        weight: pokemon.weight,
+        types: pokemon.types,
+        picture: pokemon.sprites.other,
+        // abilities: pokemon.abilities,
+        // stats: pokemon.stats,
       }) 
       state.loading = 'succeeded';
     });

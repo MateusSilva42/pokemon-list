@@ -30,7 +30,6 @@ export const fetchPokemonList = createAsyncThunk(
     }
 )
 
-
 export const pokemonListSlice = createSlice({
     name: 'pokemonList',
     initialState,
