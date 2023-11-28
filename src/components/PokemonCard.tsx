@@ -1,9 +1,12 @@
 import {IconButton, Card, CardActions, CardContent, CardMedia, Typography, Box} from "@mui/material"
 import favoriteIcon from '../assets/favorite-border.png'
 import favoritedIcon from '../assets/favorite-full.png'
-import { useState } from "react"
 import { Pokemon } from "../store/pokemon/pokemonSlice"
 import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { addFavorite, removeFavorite } from "../store/favorite/favoriteSlice"
+import { useDispatch } from "react-redux"
+import React from "react"
 
 interface PokemonCardProps {
   pokemon: Pokemon;
@@ -11,14 +14,23 @@ interface PokemonCardProps {
 }
 
 export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
-  const [isFavorited, setIsFavorited] = useState(false)
+  const favorite = useSelector((state: any) => state.favorite);
+  const dispatch = useDispatch();
 
-  console.log(bgColor);
-  
+  const isFavorited = favorite.favorites.includes(pokemon.id);
 
   const handleFavorite = () => {
-    setIsFavorited(!isFavorited)
+    if(favorite.favorites.includes(pokemon.id)){
+      // dispatch(removeFavorite(pokemon.id))
+      console.log('removendo!!!');
+      
+    } else {
+      dispatch(addFavorite(pokemon.id))
+    }
   }
+
+  console.log('favorito do card', favorite);
+  
 
   return (
     <Box>
@@ -64,7 +76,7 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
               </CardContent>
               <CardActions>
               <IconButton aria-label="favorite" onClick={handleFavorite}>
-                <img src={isFavorited? favoriteIcon : favoritedIcon} alt="favorite icon" style={{width: '40px', height: '40px'}} />
+                <img src={isFavorited? favoritedIcon : favoriteIcon } alt="favorite icon" style={{width: '40px', height: '40px'}} />
               </IconButton>
               </CardActions>
             </Card>
