@@ -1,9 +1,8 @@
 import { Box, Pagination} from "@mui/material";
 import Header from "../components/Header";
 import Pokedex from "../components/Pokedex";
-import PokemonCard from "../components/PokemonCard";
 import Footer from "../components/Footer";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPokemonList, Pokemon } from "../store/pokemon/pokemonListSlice";
 import { AppDispatch } from "../store/store";

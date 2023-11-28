@@ -2,7 +2,7 @@ import { Box, Button, Pagination, Typography} from "@mui/material";
 import Header from "../components/Header";
 import Pokedex from "../components/Pokedex";
 import Footer from "../components/Footer";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../store/store";
 import PokemonData from "../components/pokemonData";

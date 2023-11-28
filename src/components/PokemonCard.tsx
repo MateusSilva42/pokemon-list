@@ -1,13 +1,9 @@
 import {IconButton, Card, CardActions, CardContent, CardMedia, Typography, Box} from "@mui/material"
-import pokeball from '../assets/pokeball.png'
 import favoriteIcon from '../assets/favorite-border.png'
 import favoritedIcon from '../assets/favorite-full.png'
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { AppDispatch } from "../store/store"
-import { fetchPokemon, Pokemon } from "../store/pokemon/pokemonSlice"
+import { useState } from "react"
+import { Pokemon } from "../store/pokemon/pokemonSlice"
 import { Link } from "react-router-dom"
-import { red, yellow } from "@mui/material/colors"
 
 interface PokemonCardProps {
   pokemon: Pokemon;

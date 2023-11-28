@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../store/store";
-import { fetchPokemon, Pokemon } from "../store/pokemon/pokemonSlice";
+import { fetchPokemon } from "../store/pokemon/pokemonSlice";
 import PokemonCard from "./PokemonCard";
 
 interface PokemonDataProps {
