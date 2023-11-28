@@ -1,17 +1,15 @@
 import { Box, Pagination} from "@mui/material";
-import Header from "../components/Header";
+import Header from "../components/header";
 import Pokedex from "../components/Pokedex";
 import Footer from "../components/Footer";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPokemonList, Pokemon } from "../store/pokemon/pokemonListSlice";
 import { AppDispatch } from "../store/store";
 import PokemonData from "../components/pokemonData";
-import { removeFavorite, addFavorite } from "../store/favorite/favoriteSlice"
 
 
 function Home() {
-  const favorite = useSelector((state: any) => state.favorite);
   const pokemonList = useSelector((state: any) => state.pokemonList);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -19,15 +17,7 @@ function Home() {
       dispatch(fetchPokemonList());
   }, [])
 
-  useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorite.favorites));
-  }, [favorite.favorites]);
-
-
   console.log('lISTA DE POKEMONS', pokemonList);
-  console.log('favorito da home', favorite);
-  
-  
 
   return (
     <>

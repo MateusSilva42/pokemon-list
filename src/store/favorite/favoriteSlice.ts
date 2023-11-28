@@ -4,9 +4,10 @@ export interface FavoriteState {
     favorites: number[]
 }
 
+const favoritesFromLocalStorage = localStorage.getItem('favorites');
 const initialState: FavoriteState = {
-    favorites: []
-}
+  favorites: favoritesFromLocalStorage ? JSON.parse(favoritesFromLocalStorage) : [],
+};
 
 export const favoriteSlice = createSlice({
     name: 'favorite',

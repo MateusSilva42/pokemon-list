@@ -34,7 +34,7 @@ export const pokemonListSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchPokemonList.pending, (state, action) => {
+        builder.addCase(fetchPokemonList.pending, (state) => {
             state.loading = 'pending'
         })
         builder.addCase(fetchPokemonList.fulfilled, (state, action) => {
@@ -46,7 +46,7 @@ export const pokemonListSlice = createSlice({
             state.next = action.payload.next;
             state.previous = action.payload.previous;
         });
-        builder.addCase(fetchPokemonList.rejected, (state, action) => {
+        builder.addCase(fetchPokemonList.rejected, (state) => {
             state.loading = 'rejected'
         })
     }

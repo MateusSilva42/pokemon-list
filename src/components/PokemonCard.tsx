@@ -6,7 +6,6 @@ import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { addFavorite, removeFavorite } from "../store/favorite/favoriteSlice"
 import { useDispatch } from "react-redux"
-import React from "react"
 
 interface PokemonCardProps {
   pokemon: Pokemon;
@@ -20,17 +19,12 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
   const isFavorited = favorite.favorites.includes(pokemon.id);
 
   const handleFavorite = () => {
-    if(favorite.favorites.includes(pokemon.id)){
-      // dispatch(removeFavorite(pokemon.id))
-      console.log('removendo!!!');
-      
+    if(isFavorited){
+      dispatch(removeFavorite(pokemon.id));
     } else {
-      dispatch(addFavorite(pokemon.id))
+      dispatch(addFavorite(pokemon.id));
     }
   }
-
-  console.log('favorito do card', favorite);
-  
 
   return (
     <Box>
