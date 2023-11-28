@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../store/store";
-import { fetchPokemon } from "../store/pokemon/pokemonSlice";
+import { fetchPokemon, Pokemon } from "../store/pokemon/pokemonSlice";
 import PokemonCard from "./PokemonCard";
 
 interface PokemonDataProps {
@@ -10,9 +10,11 @@ interface PokemonDataProps {
 }
 
 export default function PokemonList( {url}: PokemonDataProps) {
+  // const pokemon = useSelector((state: any) => state.pokemon.data);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
+    // Substitua 'url' pela URL que você deseja buscar
     dispatch(fetchPokemon(url));
   }, []);
 

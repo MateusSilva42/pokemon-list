@@ -10,13 +10,7 @@ const routes = createBrowserRouter([
   },
   {
     path: "/pokemon",
-    element: <PokemonPage />,
-    children: [
-      {
-        path: ":id",
-        element: <PokemonPage />
-      }
-    ]
+    element: <PokemonPage />
   }
 ]);
 
