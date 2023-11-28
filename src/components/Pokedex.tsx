@@ -12,17 +12,16 @@ import { Link } from "react-router-dom";
 function Pokedex() {
   const dispatch = useDispatch<AppDispatch>();
   const favorites = useSelector((state: any) => state.favorite.favorites);
-  const favoritePokemons = []
+  const pokemonData = useSelector((state: any) => state.pokemon.data);
 
-  for(const id of favorites) {
-    const url = `https://pokeapi.co/api/v2/pokemon/${id}`
-    useEffect(() => {
+  useEffect(() => {
+    for(const id of favorites) {
+      const url = `https://pokeapi.co/api/v2/pokemon/${id}`
       dispatch(fetchPokemon(url));
-    }, []);
+    }
+  }, [favorites, dispatch]);
 
-    const pokemon = useSelector((state: any) => state.pokemon.data[id]);
-    favoritePokemons.push(pokemon)
-  }
+  const favoritePokemons = favorites.map((id: number) => pokemonData[id]).filter(Boolean);
 
   console.log('favoritePokemons', favoritePokemons);
   

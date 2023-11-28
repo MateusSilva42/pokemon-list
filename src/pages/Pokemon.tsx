@@ -15,9 +15,11 @@ function PokemonPage() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  if (!id){
-    navigate('/');
-  }
+  useEffect(() => {
+    if (!id) {
+      navigate('/');
+    }
+  }, [id, navigate]);
 
   const dispatch = useDispatch<AppDispatch>();
   const state = useSelector((state: any) => state);
