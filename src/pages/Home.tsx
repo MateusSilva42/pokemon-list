@@ -17,7 +17,7 @@ function Home() {
       dispatch(fetchPokemonList());
   }, [])
 
-  console.log('lISTA DE POKEMONS', pokemonList);
+  // console.log('lISTA DE POKEMONS', pokemonList);
 
   return (
     <>

@@ -20,7 +20,7 @@ export default function PokemonList( {url, bgColor}: PokemonDataProps) {
   const id = url.split('/')[6];
   const pokemon = useSelector((state: any) => state.pokemon.data[id]);
 
-  console.log('pokemon', pokemon);
+  // console.log('pokemon', pokemon);
   
 
   if(!pokemon) {

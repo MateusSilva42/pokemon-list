@@ -1,5 +1,5 @@
 import { Box, Button, Pagination, Typography} from "@mui/material";
-import Header from "../components/Header";
+import Header from "../components/header";
 import Pokedex from "../components/Pokedex";
 import Footer from "../components/Footer";
 import { useEffect } from "react";
@@ -31,12 +31,6 @@ function PokemonPage() {
   const pokemon = id !== undefined ? state.pokemon.data[id] : undefined;
   const pokemonStats = pokemon ? pokemon.stats : undefined;
   const statColors = ['lightgreen', 'yellow', 'orange', 'lightblue', 'violet', 'pink']
-
-  console.log('pokemonStats', pokemonStats);
-  
-
-  console.log('pokemon', pokemon);
-  
 
   if(!pokemon) {
     return null
@@ -81,7 +75,7 @@ function PokemonPage() {
           <Box sx={{marginY: 5}}>
              {/* Botão de voltar */}
               <Box sx={{display: 'flex'}}>
-                <Button variant="contained" color="warning" startIcon={<ArrowBackIcon />}  onClick={() => navigate(-1)}>Voltar</Button>
+                <Button variant="contained" color="warning" startIcon={<ArrowBackIcon />}  onClick={() => navigate('/')}>Voltar</Button>
               </Box>
           </Box>
         </Box>
