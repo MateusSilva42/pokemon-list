@@ -16,8 +16,8 @@ export interface Pokemon {
   weight: number;
   types: { type: PokemonType}[];
   picture: PokemonPicture;
-  // abilities: string[];
-  // stats: {};
+  abilities: string[];
+  stats: {};
 }
 
 interface PokemonState {
@@ -55,8 +55,8 @@ export const pokemonSlice = createSlice({
         weight: pokemon.weight,
         types: pokemon.types,
         picture: pokemon.sprites.other,
-        // abilities: pokemon.abilities,
-        // stats: pokemon.stats,
+        abilities: pokemon.abilities,
+        stats: pokemon.stats,
       }) 
       state.loading = 'succeeded';
     });
