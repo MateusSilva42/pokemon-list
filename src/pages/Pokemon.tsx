@@ -48,22 +48,67 @@ function PokemonPage() {
 
       <Pokedex />
 
-      <Box sx={{padding: 5, display:'flex', flexWrap: 'wrap'}}>
-        <Box>
-          <PokemonData url={url} bgColor={'lightyellow'} />
-        </Box>
+      <Box sx={{padding: 5, display:'flex', flexDirection:{
+        xs: 'column',
+        sm: 'column',
+        md: 'row'
+      },
+      }}>
 
-        <Box>
+          <Box sx={{display: 'flex', justifyContent: 'center'}}>
+            <PokemonData url={url} bgColor={'lightyellow'} />
+          </Box>
 
-          <Box >
-            <Typography variant="h2" color={'orange'}> { pokemon.name } </Typography>
-              <Box sx={{display: 'flex', flexWrap: 'wrap'}}>
+        <Box sx={{
+          display: 'flex', 
+          flexDirection: 'column', 
+          flexWrap: 'wrap', 
+          alignItems: {
+            xs: 'center',
+            sm: 'center',
+            md: 'start'
+          } 
+        }}>
+
+          <Box sx={{
+            display: 'flex', 
+            flexDirection:'column',
+            alignItems: {
+              xs: 'center',
+              sm: 'center',
+              md: 'start'
+            }
+            }} >
+            <Typography 
+              variant="h2" 
+              color={'orange'}
+              > 
+              
+                { pokemon.name } 
+              </Typography>
+
+              <Box sx={{
+                display: 'flex', 
+                flexWrap: 'wrap',
+                justifyContent: {
+                  sx: 'center',
+                  sm: 'center',
+                  md: 'start'
+                }
+                }}>
                 {pokemonStats.map((stat: any, index: number) => (
-                  <Box sx= {{ bgcolor: statColors[index % statColors.length], borderRadius: 25, padding: 1, marginX: 1, marginY:3}}>
+                  <Box sx= {{ 
+                    bgcolor: statColors[index % statColors.length], 
+                    borderRadius: 25, 
+                    padding: 1, 
+                    marginX: 1, 
+                    marginY:3,
+                    }}>
                     <Typography variant="h6" key={index} sx={{color: "black", fontWeight:'bold'}}> {stat.stat.name}: {stat.base_stat} </Typography>
                   </Box>
                 ))}
             </Box>    
+
           </Box>
 
           <Box sx={{marginY: 5}}>
@@ -82,6 +127,7 @@ function PokemonPage() {
                 <Button variant="contained" color="warning" startIcon={<ArrowBackIcon />}  onClick={handleBack}>Voltar</Button>
               </Box>
           </Box>
+
         </Box>
           
       </Box>

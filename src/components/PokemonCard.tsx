@@ -66,14 +66,8 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: 500 }}>
-            <Card sx={{  maxWidth: {
-              xs: 400,
-              sm: 300,
-             }, 
-             minWidth: {
-              xs: 400,
-              sm: 300,
-             },
+            <Card sx={{  maxWidth: 300,
+             minWidth: 300,
              minHeight: 400,
              marginX: 5, 
              marginY: 2,
