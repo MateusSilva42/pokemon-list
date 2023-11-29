@@ -7,6 +7,9 @@ import { useSelector } from "react-redux"
 import { addFavorite, removeFavorite } from "../store/favorite/favoriteSlice"
 import { useDispatch } from "react-redux"
 import  pokeball  from "../assets/pokeball.png"
+import { useState } from "react"
+import { useLocation } from "react-router-dom"
+import { useEffect } from "react"
 
 interface PokemonCardProps {
   pokemon: Pokemon;
@@ -17,6 +20,9 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
   const favorite = useSelector((state: any) => state.favorite);
   const dispatch = useDispatch();
 
+  const [page, setPage] = useState(1);
+  const location = useLocation();
+
   const isFavorited = favorite.favorites.includes(pokemon.id);
 
   const handleFavorite = () => {
@@ -26,6 +32,12 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
       dispatch(addFavorite(pokemon.id));
     }
   }
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const pageFromUrl = Number(params.get('page')) || 1;
+    setPage(pageFromUrl);
+  }, [location]);
 
   return (
     <Box>
@@ -56,9 +68,11 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
 
                   <Box>
                   <Typography gutterBottom variant="h5" component="div">
-                  <Link to={`/pokemon/${pokemon.id}`}>
+                    
+                  <Link to={`/pokemon/${pokemon.id}?page=${page}`}>
                     {pokemon.name}
                   </Link>
+
                   </Typography>
                   <Typography gutterBottom variant="h4" component="div">
                     #{pokemon.id}

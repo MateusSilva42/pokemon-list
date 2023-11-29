@@ -1,5 +1,5 @@
 import { Box, Button, Pagination, Typography} from "@mui/material";
-import Header from "../components/header";
+import Header from "../components/Header";
 import Pokedex from "../components/Pokedex";
 import Footer from "../components/Footer";
 import { useEffect } from "react";
@@ -10,10 +10,14 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { fetchPokemon } from "../store/pokemon/pokemonSlice";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 function PokemonPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [page, setPage] = useState(1);
+  const location = useLocation();
 
   useEffect(() => {
     if (!id) {
@@ -26,9 +30,18 @@ function PokemonPage() {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`
 
   useEffect(() => {
-    // Substitua 'url' pela URL que você deseja buscar
     dispatch(fetchPokemon(url));
   }, [id, dispatch]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const pageFromUrl = Number(params.get('page')) || 1;
+    setPage(pageFromUrl);
+  }, [location]);
+
+  const handleBack = () => {
+    navigate(`/?page=${page}`);
+  };
 
   const pokemon = id !== undefined ? state.pokemon.data[id] : undefined;
   const pokemonStats = pokemon ? pokemon.stats : undefined;
@@ -75,9 +88,8 @@ function PokemonPage() {
           </Box>
 
           <Box sx={{marginY: 5}}>
-             {/* Botão de voltar */}
               <Box sx={{display: 'flex'}}>
-                <Button variant="contained" color="warning" startIcon={<ArrowBackIcon />}  onClick={() => navigate('/')}>Voltar</Button>
+                <Button variant="contained" color="warning" startIcon={<ArrowBackIcon />}  onClick={handleBack}>Voltar</Button>
               </Box>
           </Box>
         </Box>

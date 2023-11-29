@@ -4,13 +4,11 @@ import { red } from "@mui/material/colors";
 
 function Footer() {
   return (
-    <>
-      <Box sx={{bgcolor: red[500], height:"200", padding:2, display: 'flex', justifyContent: 'center'}}>
-        <Typography variant="h6" component="div" sx={{color: "white"}}>
-         Todos os direitos reservados - Mateus Silva 2023 ©️
-        </Typography>
-      </Box>
-    </>
+    <Box sx={{ marginTop: '10px', bgcolor: red[500], padding: 2 }}>
+      <Typography variant="h6" component="div" sx={{ color: "white", textAlign: 'center' }}>
+        Todos os direitos reservados - Mateus Silva 2023 ©️
+      </Typography>
+    </Box>
   );
 }
 

@@ -1,8 +1,7 @@
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { AppDispatch } from '../store/store';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,8 +17,6 @@ export default function Paging({ page: initialPage, onChange }: PagingProps) {
   const totalPages = Math.ceil(totalPokemons / 20);
   
   const [currentPage, setCurrentPage] = React.useState(initialPage);
-
-  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     setCurrentPage(initialPage);

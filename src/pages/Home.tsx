@@ -12,7 +12,6 @@ import { useState } from "react";
 import CircularProgress from '@mui/material/CircularProgress';
 import { useLocation } from "react-router-dom";
 
-
 function Home() {
   const location = useLocation();
   const [page, setPage] = useState(1);
@@ -32,8 +31,6 @@ function Home() {
     setPage(value);
   };
 
-  console.log('lISTA DE POKEMONS', pokemonList);
-
   return (
     <>
     <Header />
@@ -46,14 +43,12 @@ function Home() {
         <Box sx={{display: "flex", flexWrap: 'wrap', justifyContent: 'center'}}>
 
           {pokemonList.pokemons.map((pokemon: Pokemon, index: number) => (
-            // <PokemonCard key={index} url={pokemon.url} />
             <PokemonData key={index} url={pokemon.url} />
           ))}
         </Box>
           
       </Box>
 
-      
       </>
     ) : (
       <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 10}} >
