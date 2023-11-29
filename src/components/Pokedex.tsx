@@ -133,8 +133,8 @@ function Pokedex() {
   }, []);
 
   return (
-    <Box>
-      <Paper elevation={3} sx={{padding:2, display:"flex", justifyContent: 'space-between', bgcolor: "lightyellow"}}>
+    <Box sx={{position: 'sticky', top: 0, zIndex:9 }}>
+      <Paper elevation={3} sx={{padding:2, display:"flex", justifyContent: 'space-between', bgcolor: "lightyellow" }}>
         
       <img src={pokedexIcon} alt="pokedex" style={{width: '60px', height: '60px', marginRight: 5}} />
 

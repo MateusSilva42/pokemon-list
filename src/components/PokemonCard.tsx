@@ -65,30 +65,95 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
   }, [location])
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: 500 }}>
-            <Card sx={{  maxWidth: 300,
-             minWidth: 300,
-             minHeight: 400,
-             marginX: 5, 
-             marginY: 2,
-             bgcolor: bgColor? bgColor : 'white',}}
+    <Box sx={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      height: {
+        xs: 300,
+        sm: 300,
+        md: 500
+      },
+      marginY: {
+        xs: 2,
+        sm: 2,
+        md: 0
+      }
+       }}>
+            <Card sx={{  
+              display: 'flex',
+              flexDirection: {
+                xs: 'row',
+                sm: 'row',
+                md: 'column'
+              },
+              maxWidth: {
+                xs: 600,
+                sm: 600,
+                md: 300
+              },
+              minWidth: {
+                xs: 600,
+                sm: 600,
+                md: 300
+              },
+              minHeight:  {
+                xs: 300,
+                sm: 300,
+                md: 400
+              },
+              marginY: {
+                xs: 5,
+                sm: 5,
+                md: 2
+              }, 
+              marginX: {
+                xs: 0,
+                sm: 0,
+                md: 5
+              },
+              bgcolor: bgColor? bgColor : 'white',}}
              >
                 <CardMedia
                   component="img"
                   alt={pokemon.name}
-                  height="250"
                   image={pokemon.picture['official-artwork'].front_default || pokeball} 
                   style={{ 
                     objectFit: 'cover',
                     objectPosition: 'top',
                   }}
+                  sx={{
+                    height: {
+                      xs: 300,
+                      sm: 300,
+                      md: 250
+                    },
+                    width: {
+                      xs: 300,
+                      sm: 300,
+                      md: 250
+                    },
+                  }}
                 />
                 <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
 
-                  <CardContent sx={{ flexGrow: 1, height: 150}} >
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between'}}>
+                  <CardContent sx={{ flexGrow: 1, height: 100}} >
+                    <Box sx={{ 
+                      display: 'flex',
+                      flexDirection: {
+                        xs: 'column',
+                        sm: 'column',
+                        md: 'row'
+                      },
+                      justifyContent: 'space-between'}}>
 
-                      <Box>
+                      <Box sx={{
+                        display: {
+                          xs: 'flex',
+                          sm: 'flex',
+                          md: 'block'
+                        },
+                        flexDirection: 'column',
+                      }}>
                       <Typography gutterBottom variant="h5" component="div">
                         
                       <Tooltip title={pokemon.name} key={pokemon.id}>
@@ -106,7 +171,16 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
                               textOverflow: 'ellipsis',
                               whiteSpace: 'nowrap',
                               display: 'block',
-                              maxWidth: 150
+                              maxWidth: {
+                                xs: 250,
+                                sm: 250,
+                                md: 150
+                              },
+                              fontSize: {
+                                xs: '33px',
+                                sm: '33px',
+                                md: '24px'
+                              },
                             }}
                           >
                             {pokemon.name}
@@ -115,7 +189,9 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
                       </Tooltip>
 
                       </Typography>
+                      <Box sx={{marginBottom: 2}}>
                         <Chip label={`#${pokemon.id}`} />
+                      </Box>
                       </Box>
 
                       <Box>
@@ -139,8 +215,8 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
                     
                   </CardContent>
                   <CardActions>
-                  <IconButton aria-label="favorite" onClick={handleFavorite}>
-                    <img src={isFavorited? favoritedIcon : favoriteIcon } alt="favorite icon" style={{width: '40px', height: '40px'}} />
+                  <IconButton aria-label="favorite" onClick={handleFavorite} sx={{}}>
+                    <img src={isFavorited? favoritedIcon : favoriteIcon } alt="favorite icon" style={{width: '60px', height: '60px'}} />
                   </IconButton>
                   </CardActions>
 
