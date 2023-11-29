@@ -32,22 +32,35 @@ function Pokedex() {
   };
   
 
-  const drag = (e: React.TouchEvent) => {
-    e.preventDefault();
-    const x = e.touches[0].pageX;
-    const now = Date.now();
-    const elapsed = now - lastTime;
-    if (elapsed > 0) {
-      const velocity = (lastX - x) / elapsed; // Invert the direction
-      setVelocity(velocity * 1000); // pixels per second
+  useEffect(() => {
+    const drag = (e: TouchEvent) => {
+      e.preventDefault();
+      const x = e.touches[0].pageX;
+      const now = Date.now();
+      const elapsed = now - lastTime;
+      if (elapsed > 0) {
+        const velocity = (lastX - x) / elapsed;
+        setVelocity(velocity * 1000);
+      }
+      setLastX(x);
+      setLastTime(now);
+      const walk = (startX - x);
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollLeft = scrollLeft + walk;
+      }
+    };
+  
+    const scrollContainer = scrollContainerRef.current;
+    if (scrollContainer) {
+      scrollContainer.addEventListener('touchmove', drag, { passive: false });
     }
-    setLastX(x);
-    setLastTime(now);
-    const walk = (startX - x);
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft = scrollLeft + walk;
-    }
-  };
+  
+    return () => {
+      if (scrollContainer) {
+        scrollContainer.removeEventListener('touchmove', drag);
+      }
+    };
+  }, [lastX, lastTime, startX, scrollLeft]);
 
   const endDrag = () => {
     setIsDragging(false);
@@ -57,11 +70,11 @@ function Pokedex() {
     if (!isDragging) {
       const interval = setInterval(() => {
         if (scrollContainerRef.current && Math.abs(velocity) > 0.01) {
-          const delta = velocity / 60; // assuming 60 FPS
+          const delta = velocity / 60; 
           scrollContainerRef.current.scrollLeft += delta;
-          setVelocity(velocity * 0.65); // apply some friction
+          setVelocity(velocity * 0.65);
         }
-      }, 1000 / 60); // 60 FPS
+      }, 1000 / 60);
       return () => clearInterval(interval);
     }
   }, [isDragging, velocity]);
@@ -128,7 +141,6 @@ function Pokedex() {
         <Box 
         ref={scrollContainerRef} 
         onTouchStart={startDrag}
-        onTouchMove={drag}
         onTouchEnd={endDrag}
         sx={{
           display: 'flex', 
