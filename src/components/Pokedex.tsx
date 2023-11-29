@@ -7,6 +7,7 @@ import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import {ArrowBackIos, ArrowForwardIos} from '@mui/icons-material/'
 import pokedexIcon from "../assets/pokedex_icon.png"
+import avatarDefault from "../assets/pokeball.png"
 
 
 function Pokedex() {
@@ -155,7 +156,7 @@ function Pokedex() {
                 <Link to={`/pokemon/${pokemon.id}`}> 
                   <Avatar
                     alt={pokemon.name}
-                    src={pokemon.picture['official-artwork'].front_default}
+                    src={pokemon.picture['official-artwork'].front_default || avatarDefault}
                     sx={{ 
                       width: 70, 
                       height: 70, 
