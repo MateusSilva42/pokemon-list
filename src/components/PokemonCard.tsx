@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { addFavorite, removeFavorite } from "../store/favorite/favoriteSlice"
 import { useDispatch } from "react-redux"
+import  pokeball  from "../assets/pokeball.png"
 
 interface PokemonCardProps {
   pokemon: Pokemon;
@@ -28,10 +29,14 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
 
   return (
     <Box>
-            <Card sx={{  minWidth: {
+            <Card sx={{  maxWidth: {
               xs: 400,
               sm: 300,
              }, 
+             minWidth: {
+              xs: 400,
+              sm: 300,
+             },
              marginX: 5, 
              marginY: 2,
              bgcolor: bgColor? bgColor : 'white',}}
@@ -40,7 +45,7 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
                   component="img"
                   alt={pokemon.name}
                   height="250"
-                  image={pokemon.picture['official-artwork'].front_default}
+                  image={pokemon.picture['official-artwork'].front_default || pokeball} 
                   style={{ 
                     objectFit: 'cover',
                     objectPosition: 'top',

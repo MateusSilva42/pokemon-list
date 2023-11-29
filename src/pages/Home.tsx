@@ -1,32 +1,50 @@
-import { Box, Pagination} from "@mui/material";
-import Header from "../components/header";
+import { Box} from "@mui/material";
+import Header from "../components/Header";
 import Pokedex from "../components/Pokedex";
 import Footer from "../components/Footer";
+import Paging from "../components/pagination";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPokemonList, Pokemon } from "../store/pokemon/pokemonListSlice";
 import { AppDispatch } from "../store/store";
 import PokemonData from "../components/pokemonData";
+import { useState } from "react";
+import CircularProgress from '@mui/material/CircularProgress';
+import { useLocation } from "react-router-dom";
 
 
 function Home() {
+  const location = useLocation();
+  const [page, setPage] = useState(1);
   const pokemonList = useSelector((state: any) => state.pokemonList);
   const dispatch = useDispatch<AppDispatch>();
+  const loading = useSelector((state: any) => state.pokemonList.loading);
 
   useEffect(() => {
-      dispatch(fetchPokemonList());
-  }, [])
+    const params = new URLSearchParams(location.search);
+    const pageFromUrl = Number(params.get('page')) || 1;
+    setPage(pageFromUrl);
+    const url = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${(page - 1) * 20}`;
+    dispatch(fetchPokemonList(url));
+  }, [page, dispatch]);
 
-  // console.log('lISTA DE POKEMONS', pokemonList);
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
+  console.log('lISTA DE POKEMONS', pokemonList);
 
   return (
     <>
-      <Header />
+    <Header />
 
-      <Pokedex />
+    <Pokedex />
+    {loading === 'succeded' ? (
+      <>
 
       <Box sx={{padding: 5, display:'flex', flexDirection: 'column' ,alignItems:'center'}}>
         <Box sx={{display: "flex", flexWrap: 'wrap', justifyContent: 'center'}}>
+
           {pokemonList.pokemons.map((pokemon: Pokemon, index: number) => (
             // <PokemonCard key={index} url={pokemon.url} />
             <PokemonData key={index} url={pokemon.url} />
@@ -35,12 +53,19 @@ function Home() {
           
       </Box>
 
+      
+      </>
+    ) : (
+      <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 10}} >
+        <CircularProgress color="error" />
+      </Box>
+    )}
       <Box sx={{display: 'flex', justifyContent: 'center', marginBottom: 5}}>
-          <Pagination></Pagination>
+          <Paging page={page} onChange={handlePageChange}></Paging>
       </Box>
 
       <Footer />
-
+      
     </>
   );
 }

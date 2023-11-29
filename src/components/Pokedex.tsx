@@ -23,7 +23,7 @@ function Pokedex() {
 
   const favoritePokemons = favorites.map((id: number) => pokemonData[id]).filter(Boolean);
 
-  console.log('favoritePokemons', favoritePokemons);
+  // console.log('favoritePokemons', favoritePokemons);
   
 
   return (
@@ -39,7 +39,7 @@ function Pokedex() {
 
             {favoritePokemons.map((pokemon: Pokemon, index: number) => (
               pokemon && (
-                <Tooltip title={pokemon.name}>
+                <Tooltip title={pokemon.name} key={pokemon.id}>
                   <Link to={`/pokemon/${pokemon.id}`}> 
                     <Avatar
                       alt={pokemon.name}

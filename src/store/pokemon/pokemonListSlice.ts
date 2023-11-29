@@ -10,6 +10,7 @@ export interface PokemonListState {
     pokemons: Pokemon[]
     next: string | null
     previous: string | null
+    count: number
     loading: 'idle' | 'pending' | 'rejected' | 'succeded'
 }
 
@@ -17,6 +18,7 @@ const initialState: PokemonListState = {
     pokemons: [],
     next: null,
     previous: null,
+    count: 0,
     loading: 'idle'
 }
 
@@ -45,6 +47,7 @@ export const pokemonListSlice = createSlice({
             }));
             state.next = action.payload.next;
             state.previous = action.payload.previous;
+            state.count = action.payload.count;
         });
         builder.addCase(fetchPokemonList.rejected, (state) => {
             state.loading = 'rejected'

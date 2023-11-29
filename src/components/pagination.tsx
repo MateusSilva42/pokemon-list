@@ -1,19 +1,42 @@
-import { useNavigate } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { AppDispatch } from '../store/store';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export default function PaginationRounded() {
-  const history = useNavigate();
+interface PagingProps {
+  page: number;
+  onChange: (event: React.ChangeEvent<unknown>, page: number) => void;
+}
+
+export default function Paging({ page: initialPage, onChange }: PagingProps) {
+  const navigate = useNavigate();
+  const pokemonList = useSelector((state: any) => state.pokemonList)
+  const totalPokemons = pokemonList.count
+  const totalPages = Math.ceil(totalPokemons / 20);
+  
+  const [currentPage, setCurrentPage] = React.useState(initialPage);
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    setCurrentPage(initialPage);
+  }, [initialPage]);
 
   const handleChange = (event: React.ChangeEvent<unknown>, page: number) => {
-    // history.push(`/page/${page}`);
-    console.log('change page', page);
-    
+    setCurrentPage(page);
+    onChange(event, page);
+    navigate(`?page=${page}`)
   };
 
+
   return (
+    <>
     <Stack spacing={2}>
-      <Pagination count={10} variant="outlined" shape="rounded" onChange={handleChange} />
+      <Pagination count={totalPages} page={currentPage} variant="outlined" shape="rounded" onChange={handleChange} />
     </Stack>
+    </>
   );
 }
