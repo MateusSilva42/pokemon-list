@@ -17,10 +17,11 @@ function Home() {
     const params = new URLSearchParams(location.search);
     const pageFromUrl = Number(params.get('page')) || 1;
     setPage(pageFromUrl);
-    const url = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${(page - 1) * 20}`;
+  
+    const url = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${(pageFromUrl - 1) * 20}`;
     dispatch(fetchPokemonList(url));
-  }, [page, dispatch]);
-
+  }, [location, dispatch]);
+  
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };

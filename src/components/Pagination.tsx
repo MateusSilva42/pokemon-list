@@ -30,7 +30,26 @@ export default function Paging({ page: initialPage, onChange }: PagingProps) {
   return (
     <>
     <Stack spacing={2}>
-      <Pagination count={totalPages} page={currentPage} variant="outlined" shape="rounded" onChange={handleChange} />
+      <Pagination 
+      count={totalPages} 
+      page={currentPage} 
+      variant="outlined" 
+      shape="rounded" 
+      onChange={handleChange}
+      sx={{
+        color: 'black',
+        '& .MuiPaginationItem-root': {
+          backgroundColor: 'lightyellow',
+          borderColor: 'black',
+          fontWeight: 'bold',
+          // boxShadow: '0px 0px 5px 2px rgba(0,0,0,0.5)',
+        },
+        '& .MuiPaginationItem-page.Mui-selected': {
+          backgroundColor: '#f00',
+          color: 'white'
+        },
+      }}
+       />
     </Stack>
     </>
   )
