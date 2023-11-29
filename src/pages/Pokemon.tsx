@@ -41,10 +41,6 @@ function PokemonPage() {
   const pokemonStats = pokemon ? pokemon.stats : undefined;
   const statColors = ['lightgreen', 'yellow', 'orange', 'lightblue', 'violet', 'pink']
 
-  if(!pokemon) {
-    return null
-  }
-  
 
   return (
     <>
@@ -54,13 +50,13 @@ function PokemonPage() {
 
       <Box sx={{padding: 5, display:'flex', flexWrap: 'wrap'}}>
         <Box>
-          <PokemonData url={url} bgColor="orange" />
+          <PokemonData url={url} bgColor={'lightyellow'} />
         </Box>
 
         <Box>
 
           <Box >
-            <Typography variant="h4"> Stats </Typography>
+            <Typography variant="h2" color={'orange'}> { pokemon.name } </Typography>
               <Box sx={{display: 'flex', flexWrap: 'wrap'}}>
                 {pokemonStats.map((stat: any, index: number) => (
                   <Box sx= {{ bgcolor: statColors[index % statColors.length], borderRadius: 25, padding: 1, marginX: 1, marginY:3}}>
@@ -71,11 +67,11 @@ function PokemonPage() {
           </Box>
 
           <Box sx={{marginY: 5}}>
-          <Typography variant="h4"> Lista de habilidades: </Typography>
+          <Typography variant="h4"> Habilidades </Typography>
             <Box sx={{display: 'flex', flexWrap: 'wrap'}}>
               {pokemon.abilities.map((ability: any, index: number) => (
-                <Box sx= {{ bgcolor: 'red', borderRadius: 25, padding: 1, marginX: 1, marginY:3}}>
-                  <Typography variant="h6" key={index} sx={{color: "white", fontWeight:'bold'}}> {ability.ability.name} </Typography>
+                <Box sx= {{ bgcolor: 'Salmon', borderRadius: 25, padding: 1, marginX: 1, marginY:3}}>
+                  <Typography variant="h6" key={index} sx={{fontWeight:'bold'}}> {ability.ability.name} </Typography>
                 </Box>
               ))}
             </Box>
