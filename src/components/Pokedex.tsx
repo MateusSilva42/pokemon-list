@@ -49,6 +49,26 @@ function Pokedex() {
     } 
   }
 
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollLeft += e.deltaY;
+      }
+    };
+  
+    const scrollContainer = scrollContainerRef.current;
+    if (scrollContainer) {
+      scrollContainer.addEventListener('wheel', handleWheel, { passive: false });
+    }
+  
+    return () => {
+      if (scrollContainer) {
+        scrollContainer.removeEventListener('wheel', handleWheel);
+      }
+    };
+  }, []);
+
   return (
     <Box>
       <Paper elevation={3} sx={{padding:2, display:"flex", justifyContent: 'space-between', bgcolor: "lightyellow"}}>
@@ -56,7 +76,15 @@ function Pokedex() {
       <img src={pokedexIcon} alt="pokedex" style={{width: '60px', height: '60px', marginRight: 5}} />
 
         {canScroll && <IconButton onClick={() => scroll(-200)}> <ArrowBackIos /> </IconButton>}
-        <Box ref={scrollContainerRef} sx={{display: 'flex', overflowX: 'hidden', overflowY:'hidden' , whiteSpace: 'nowrap', flex: '1 1 auto' }}>
+        <Box 
+        ref={scrollContainerRef} 
+        sx={{
+          display: 'flex', 
+          overflowX: 'hidden', 
+          overflowY:'hidden' , 
+          whiteSpace: 'nowrap', 
+          flex: '1 1 auto' }}>
+
           {favoritePokemons.map((pokemon: Pokemon) => (
             pokemon && (
               <Tooltip title={pokemon.name} key={pokemon.id}>
