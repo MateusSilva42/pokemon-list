@@ -1,12 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "../pages/Home";
 import PokemonPage from "../pages/Pokemon"
+import Error404 from "../pages/Error404"
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
-    errorElement: <h1>Error 404 - Not Found</h1>,
+    errorElement: <Error404 />,
   },
   {
     path: "/pokemon",
