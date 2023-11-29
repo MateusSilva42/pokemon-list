@@ -22,7 +22,7 @@ function Home() {
     dispatch(fetchPokemonList(url));
   }, [location, dispatch]);
   
-  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (_: unknown, value: number) => {
     setPage(value);
   };
 
