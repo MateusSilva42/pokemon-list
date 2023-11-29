@@ -69,12 +69,12 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
       display: 'flex', 
       flexDirection: 'column', 
       height: {
-        xs: 300,
+        xs: 250,
         sm: 300,
         md: 500
       },
       marginY: {
-        xs: 2,
+        xs: 0,
         sm: 2,
         md: 0
       }
@@ -87,17 +87,17 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
                 md: 'column'
               },
               maxWidth: {
-                xs: 600,
+                xs: 300,
                 sm: 600,
                 md: 300
               },
               minWidth: {
-                xs: 600,
+                xs: 300,
                 sm: 600,
                 md: 300
               },
               minHeight:  {
-                xs: 300,
+                xs: 200,
                 sm: 300,
                 md: 400
               },
@@ -123,12 +123,12 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
                   }}
                   sx={{
                     height: {
-                      xs: 300,
+                      xs: 150,
                       sm: 300,
                       md: 250
                     },
                     width: {
-                      xs: 300,
+                      xs: 150,
                       sm: 300,
                       md: 250
                     },
@@ -172,12 +172,12 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
                               whiteSpace: 'nowrap',
                               display: 'block',
                               maxWidth: {
-                                xs: 250,
+                                xs: 120,
                                 sm: 250,
                                 md: 150
                               },
                               fontSize: {
-                                xs: '33px',
+                                xs: '20px',
                                 sm: '33px',
                                 md: '24px'
                               },
@@ -195,7 +195,10 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
                       </Box>
 
                       <Box>
-                        <Typography variant="subtitle2" sx={{marginBottom: 2 }}>Peso: {(pokemon.weight)/10 }Kg</Typography>
+                        <Typography variant="subtitle2" sx={{marginBottom: 2, display:{
+                          xs: 'none',
+                          sm: 'block'
+                        } }}>Peso: {(pokemon.weight)/10 }Kg</Typography>
                         {pokemon.types.map(t => (
                           <Chip 
                             key={t.type.name}
@@ -215,7 +218,15 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
                     
                   </CardContent>
                   <CardActions>
-                  <IconButton aria-label="favorite" onClick={handleFavorite} sx={{}}>
+                  <IconButton aria-label="favorite" onClick={handleFavorite} sx={{display: {
+                    xs: 'fixed',
+                    sm: 'flex'
+                  },
+                    left: {
+                      xs: 70,
+                      sm: 'auto'
+                    }
+                  }}>
                     <img src={isFavorited? favoritedIcon : favoriteIcon } alt="favorite icon" style={{width: '60px', height: '60px'}} />
                   </IconButton>
                   </CardActions>
