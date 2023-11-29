@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import PokemonPage from '../pages/Pokemon';
-import Error404 from '../pages/Error404';
+import Error404 from '../pages/404';
 
 function AppRoutes() {
   return (
