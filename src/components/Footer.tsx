@@ -1,6 +1,5 @@
-import { Box } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
+import { Box, Typography } from "@mui/material"
+import { red } from "@mui/material/colors"
 
 function Footer() {
   return (

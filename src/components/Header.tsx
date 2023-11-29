@@ -1,7 +1,6 @@
-import { Box } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import pokeball  from "../assets/pokeball.png";
+import { Box, Typography } from "@mui/material"
+import { red } from "@mui/material/colors"
+import pokeball  from "../assets/pokeball.png"
 
 function Header() {
   return (

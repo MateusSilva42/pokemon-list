@@ -1,16 +1,10 @@
-import { Box} from "@mui/material";
-import Header from "../components/Header";
-import Pokedex from "../components/Pokedex";
-import Footer from "../components/Footer";
-import Paging from "../components/pagination";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchPokemonList, Pokemon } from "../store/pokemon/pokemonListSlice";
-import { AppDispatch } from "../store/store";
-import PokemonData from "../components/pokemonData";
-import { useState } from "react";
-import CircularProgress from '@mui/material/CircularProgress';
-import { useLocation } from "react-router-dom";
+import { Box, CircularProgress } from "@mui/material"
+import {Header, Pokedex, Footer, Paging, PokemonData} from "../components"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchPokemonList, Pokemon } from "../store/pokemon/pokemonListSlice"
+import { AppDispatch } from "../store/store"
+import { useLocation } from "react-router-dom"
 
 function Home() {
   const location = useLocation();

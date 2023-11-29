@@ -1,17 +1,11 @@
 import { Box, Button, Pagination, Typography} from "@mui/material";
-import Header from "../components/Header";
-import Pokedex from "../components/Pokedex";
-import Footer from "../components/Footer";
-import { useEffect } from "react";
+import {Header, Pokedex, Footer, PokemonData} from "../components"
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../store/store";
-import PokemonData from "../components/pokemonData";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { fetchPokemon } from "../store/pokemon/pokemonSlice";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
 
 function PokemonPage() {
   const { id } = useParams();

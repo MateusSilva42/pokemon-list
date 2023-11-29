@@ -2,14 +2,11 @@ import {IconButton, Card, CardActions, CardContent, CardMedia, Typography, Box} 
 import favoriteIcon from '../assets/favorite-border.png'
 import favoritedIcon from '../assets/favorite-full.png'
 import { Pokemon } from "../store/pokemon/pokemonSlice"
-import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { Link, useLocation } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
 import { addFavorite, removeFavorite } from "../store/favorite/favoriteSlice"
-import { useDispatch } from "react-redux"
 import  pokeball  from "../assets/pokeball.png"
-import { useState } from "react"
-import { useLocation } from "react-router-dom"
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 
 interface PokemonCardProps {
   pokemon: Pokemon;
@@ -18,26 +15,26 @@ interface PokemonCardProps {
 
 export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
   const favorite = useSelector((state: any) => state.favorite);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const [page, setPage] = useState(1);
-  const location = useLocation();
+  const [page, setPage] = useState(1)
+  const location = useLocation()
 
-  const isFavorited = favorite.favorites.includes(pokemon.id);
+  const isFavorited = favorite.favorites.includes(pokemon.id)
 
   const handleFavorite = () => {
     if(isFavorited){
-      dispatch(removeFavorite(pokemon.id));
+      dispatch(removeFavorite(pokemon.id))
     } else {
-      dispatch(addFavorite(pokemon.id));
+      dispatch(addFavorite(pokemon.id))
     }
   }
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const pageFromUrl = Number(params.get('page')) || 1;
-    setPage(pageFromUrl);
-  }, [location]);
+    const params = new URLSearchParams(location.search)
+    const pageFromUrl = Number(params.get('page')) || 1
+    setPage(pageFromUrl)
+  }, [location])
 
   return (
     <Box>
@@ -94,5 +91,5 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
               </CardActions>
             </Card>
     </Box>
-  );
+  )
 }
