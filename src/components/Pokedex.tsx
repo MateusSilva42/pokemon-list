@@ -13,6 +13,59 @@ function Pokedex() {
   const dispatch = useDispatch<AppDispatch>()
   const favorites = useSelector((state: any) => state.favorite.favorites)
   const pokemonData = useSelector((state: any) => state.pokemon.data)
+  const favoritePokemons = favorites.map((id: number) => pokemonData[id]).filter(Boolean)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const [canScroll, setCanScroll] = useState(false)
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [velocity, setVelocity] = useState(0);
+  const [lastX, setLastX] = useState(0);
+  const [lastTime, setLastTime] = useState(0);
+
+  const startDrag = (e: React.TouchEvent) => {
+    setIsDragging(true);
+    setStartX(e.touches[0].pageX);
+    if (scrollContainerRef.current) {
+      setScrollLeft(scrollContainerRef.current.scrollLeft);
+    }
+  };
+  
+
+  const drag = (e: React.TouchEvent) => {
+    e.preventDefault();
+    const x = e.touches[0].pageX;
+    const now = Date.now();
+    const elapsed = now - lastTime;
+    if (elapsed > 0) {
+      const velocity = (lastX - x) / elapsed; // Invert the direction
+      setVelocity(velocity * 1000); // pixels per second
+    }
+    setLastX(x);
+    setLastTime(now);
+    const walk = (startX - x);
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft = scrollLeft + walk;
+    }
+  };
+
+  const endDrag = () => {
+    setIsDragging(false);
+  };
+
+  useEffect(() => {
+    if (!isDragging) {
+      const interval = setInterval(() => {
+        if (scrollContainerRef.current && Math.abs(velocity) > 0.01) {
+          const delta = velocity / 60; // assuming 60 FPS
+          scrollContainerRef.current.scrollLeft += delta;
+          setVelocity(velocity * 0.65); // apply some friction
+        }
+      }, 1000 / 60); // 60 FPS
+      return () => clearInterval(interval);
+    }
+  }, [isDragging, velocity]);
+  
 
   useEffect(() => {
     for(const id of favorites) {
@@ -20,10 +73,6 @@ function Pokedex() {
       dispatch(fetchPokemon(url));
     }
   }, [favorites, dispatch])
-
-  const favoritePokemons = favorites.map((id: number) => pokemonData[id]).filter(Boolean)
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
-  const [canScroll, setCanScroll] = useState(false)
 
   useEffect(() => {
     const checkCanScroll = () => {
@@ -78,6 +127,9 @@ function Pokedex() {
         {canScroll && <IconButton onClick={() => scroll(-200)}> <ArrowBackIos /> </IconButton>}
         <Box 
         ref={scrollContainerRef} 
+        onTouchStart={startDrag}
+        onTouchMove={drag}
+        onTouchEnd={endDrag}
         sx={{
           display: 'flex', 
           overflowX: 'hidden', 
