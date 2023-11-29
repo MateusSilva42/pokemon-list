@@ -1,5 +1,5 @@
 import Footer from "./Footer";
-import Header from "./Header";
+import Header from "./PageHeader";
 import Paging from "./Pagination";
 import Pokedex from "./Pokedex";
 import PokemonCard from "./PokemonCard";
