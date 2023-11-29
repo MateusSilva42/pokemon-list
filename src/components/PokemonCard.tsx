@@ -128,6 +128,7 @@ export default function PokemonCard( {pokemon, bgColor}: PokemonCardProps) {
                         <Typography variant="subtitle2" sx={{marginBottom: 2 }}>Peso: {(pokemon.weight)/10 }Kg</Typography>
                         {pokemon.types.map(t => (
                           <Chip 
+                            key={t.type.name}
                             label={t.type.name} 
                             size="small" 
                             sx={{ 
