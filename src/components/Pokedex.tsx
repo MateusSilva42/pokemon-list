@@ -192,9 +192,9 @@ function Pokedex() {
               height: 70, 
               marginRight: 2, 
               cursor: 'pointer',
-              transition: 'transform 1.5s ease-in-out',
+              transition: 'transform 0.3s ease-in-out',
               '&:hover': {
-                transform: 'scale(1.2)',
+                transform: 'scale(1.1)',
               }    
             }}
           />
