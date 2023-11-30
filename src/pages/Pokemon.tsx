@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, Pagination, Typography} from "@mui/material";
+import { Box, Button, CircularProgress, Typography} from "@mui/material";
 import {Header, Pokedex, Footer, PokemonData} from "../components"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
