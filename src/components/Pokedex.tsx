@@ -8,6 +8,7 @@ import { Link } from "react-router-dom"
 import {ArrowBackIos, ArrowForwardIos} from '@mui/icons-material/'
 import pokedexIcon from "../assets/pokedex_icon.png"
 import avatarDefault from "../assets/pokeball.png"
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 function Pokedex() {
@@ -23,6 +24,7 @@ function Pokedex() {
   const [velocity, setVelocity] = useState(0);
   const [lastX, setLastX] = useState(0);
   const [lastTime, setLastTime] = useState(0);
+  const [hoverId, setHoverId] = useState<number | null>(null);
 
   const startDrag = (e: React.TouchEvent) => {
     setIsDragging(true);
@@ -132,6 +134,10 @@ function Pokedex() {
     };
   }, []);
 
+  const removeFromFavorites = (id: number) => {
+    dispatch({type: 'favorite/removeFavorite', payload: id})
+  }
+
   return (
     <Box sx={{position: 'sticky', top: 0, zIndex:9 }}>
       <Paper elevation={3} sx={{padding:2, display:"flex", justifyContent: 'space-between', bgcolor: "lightyellow" }}>
@@ -153,23 +159,48 @@ function Pokedex() {
           {favoritePokemons.map((pokemon: Pokemon) => (
             pokemon && (
               <Tooltip title={pokemon.name} key={pokemon.id}>
-                <Link to={`/pokemon/${pokemon.id}`}> 
-                  <Avatar
-                    alt={pokemon.name}
-                    src={pokemon.picture['official-artwork'].front_default || avatarDefault}
-                    sx={{ 
-                      width: 70, 
-                      height: 70, 
-                      marginRight: 2, 
-                      cursor: 'pointer',
-                      transition: 'tranform 1.5s ease-in-out',
-                      '&:hover': {
-                        transform: 'scale(1.2)',
-                      }    
-                    }}
-                  />
-                </Link>
-              </Tooltip>
+      <div 
+        style={{ position: 'relative', overflow: 'visible' }} 
+        onMouseEnter={() => setHoverId(pokemon.id)}
+        onMouseLeave={() => setHoverId(null)}
+      >
+        <IconButton 
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            removeFromFavorites(pokemon.id);
+          }} 
+          style={{ 
+            position: 'absolute', 
+            top: '-10px', 
+            right: '-10px', 
+            opacity: hoverId === pokemon.id ? 1 : 0, 
+            transition: 'opacity 0.3s',
+            color: 'red', 
+            backgroundColor: 'white',
+          }}
+        >
+          <DeleteIcon />
+        </IconButton>
+        <Link to={`/pokemon/${pokemon.id}`}> 
+          <Box 
+            component={Avatar}
+            alt={pokemon.name}
+            src={pokemon.picture['official-artwork'].front_default || avatarDefault}
+            sx={{ 
+              width: 70, 
+              height: 70, 
+              marginRight: 2, 
+              cursor: 'pointer',
+              transition: 'transform 1.5s ease-in-out',
+              '&:hover': {
+                transform: 'scale(1.2)',
+              }    
+            }}
+          />
+        </Link>
+      </div>
+    </Tooltip>
             )
           ))}
         </Box>
