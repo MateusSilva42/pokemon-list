@@ -140,12 +140,6 @@ function PokemonPage() {
       </Box>
     )}
 
-    
-
-      <Box sx={{display: 'flex', justifyContent: 'center', marginBottom: 5}}>
-          <Pagination></Pagination>
-      </Box>
-
       <Footer />
 
     </>
