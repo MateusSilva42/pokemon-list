@@ -33,7 +33,6 @@ function Pokedex() {
       setScrollLeft(scrollContainerRef.current.scrollLeft);
     }
   };
-  
 
   useEffect(() => {
     const drag = (e: TouchEvent) => {
@@ -134,6 +133,10 @@ function Pokedex() {
     };
   }, []);
 
+  const sortedFavoritePokemons = [...favoritePokemons].sort((a, b) => {
+    return favorites.indexOf(b.id) - favorites.indexOf(a.id);
+  });
+
   const removeFromFavorites = (id: number) => {
     dispatch({type: 'favorite/removeFavorite', payload: id})
   }
@@ -156,7 +159,7 @@ function Pokedex() {
           whiteSpace: 'nowrap', 
           flex: '1 1 auto' }}>
 
-          {favoritePokemons.map((pokemon: Pokemon) => (
+          {sortedFavoritePokemons.map((pokemon: Pokemon) => (
             pokemon && (
               <Tooltip title={pokemon.name} key={pokemon.id}>
       <div 
